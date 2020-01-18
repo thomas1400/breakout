@@ -25,8 +25,8 @@ public class Brick extends Group {
         this.drop = drop;
     }
 
-    public void breakBrick() {
-        image.setX(-1 * image.getBoundsInParent().getWidth() - 10);
+    public void damageBrick() {
+        durability -= 1;
     }
 
     public ImageView getImage() {
@@ -37,4 +37,15 @@ public class Brick extends Group {
         return score;
     }
 
+    public boolean isBroken() {
+        return durability <= 0;
+    }
+
+    public int getDrop() {
+        return drop;
+    }
+
+    public void breakBrick() {
+        image.setX(-1 * image.getBoundsInParent().getWidth() - 10);
+    }
 }
