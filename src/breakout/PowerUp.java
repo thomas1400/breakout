@@ -16,14 +16,11 @@ public class PowerUp extends Group {
     private ImageView image;
 
     public PowerUp(int type, double x, double y) {
+        super();
         this.type = type;
         retrieveImage(type);
         image.setX(x);
         image.setY(y);
-    }
-
-    public void updatePosition(double elapsedTime) {
-        image.setY(image.getY() + POWER_UP_SPEED * elapsedTime);
     }
 
     private void retrieveImage(int type) {

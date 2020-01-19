@@ -12,15 +12,16 @@ public class Ball extends Group {
     public static final double MAX_BALL_SPEED = 400;
 
     public Ball(double x, double y, int number) {
+        super();
         initializeImage();
         this.image.setX(x - this.image.getLayoutBounds().getWidth() / 2.0);
         this.image.setY(y - this.image.getLayoutBounds().getHeight() / 2.0);
 
         this.direction = new double[]{0, 0};
         if (number == 0) {
-            addVelocity(0, 1);
+            addVelocity(0 + 0.02 * Math.random(), 1);
         } else {
-            addVelocity(0, -1);
+            addVelocity(Math.random(), -1);
         }
     }
 
@@ -55,6 +56,30 @@ public class Ball extends Group {
 
     public double getY() {
         return this.image.getY();
+    }
+
+    public double getCenterX() {
+        return this.getBoundsInParent().getCenterX();
+    }
+
+    public double getCenterY() {
+        return this.getBoundsInParent().getCenterY();
+    }
+
+    public double getMinX() {
+        return this.getBoundsInParent().getMinX();
+    }
+
+    public double getMaxX() {
+        return this.getBoundsInParent().getMaxX();
+    }
+
+    public double getMinY() {
+        return this.getBoundsInParent().getMinY();
+    }
+
+    public double getMaxY() {
+        return this.getBoundsInParent().getMaxY();
     }
 
     public void multiplyVelocity(double xv, double yv) {
