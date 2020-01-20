@@ -90,6 +90,10 @@ public class Brick extends Group {
         return this.getBoundsInParent().getMaxY();
     }
 
+    public boolean isMothership() {
+        return imagePath.equals("alienmothership.gif");
+    }
+
     @Override
     public String toString() {
         //"className imagePath x y durability score drop", tab separated with newline at end

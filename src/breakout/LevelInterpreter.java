@@ -55,16 +55,16 @@ public class LevelInterpreter {
         } else if (character.equals("5")) {
             return new Brick("alienbrick5.gif", x, y, 1, 200, 0);
         } else if (character.equals("P")) {
-            return new Brick("alienplanet.gif", x, y, 20, 300, 0);
+            return new Brick("alienplanet.gif", x, y, 15, 300, 0);
         } else if (character.equals("M")) {
-            return new Brick("alienmothership.gif", x, y, 15, 500, 0);
+            return new Brick("alienmothership.gif", x, y, 5, 500, 0);
         } else {
             return null;
         }
     }
 
 
-    public static ArrayList<Brick> buildRandomLevel() {
+    private static ArrayList<Brick> buildRandomLevel() {
         ArrayList<Brick> bricks = new ArrayList<>();
         final int BRICK_LAYERS = 15;
         Brick layoutBrick = new Brick("alienbrick1.gif", 0, 0, 1, 0, 0);
@@ -72,23 +72,11 @@ public class LevelInterpreter {
 
         for (int yOff = 1; yOff <= BRICK_LAYERS; yOff++) {
             for (int xOff = 0; xOff * (layoutBrick.getBoundsInParent().getWidth() + 4) < WIDTH - 2*INFO_WIDTH; xOff++) {
-                int drop = 0;
                 if (Math.random() > 0.5) {
-                    double rand = Math.random();
-                    if (0.6 < rand && rand < 0.75) {
-                        drop = 1;
-                    } else if (0.75 < rand && rand < 0.92) {
-                        drop = 2;
-                    } else if (0.92 < rand) {
-                        drop = 3;
-                    }
                     Brick brick = interpretCharacter(brickTypes[(int)(Math.random() * brickTypes.length)],
                             Math.floor(xOff * (layoutBrick.getBoundsInParent().getWidth() + 4)) + INFO_WIDTH,
                             yOff * layoutBrick.getBoundsInParent().getHeight() + INFO_HEIGHT);
-//                    Brick brick = new Brick("alienbrick" + (yOff % 5 + 1) + ".gif",
-//                            Math.floor(xOff * (layoutBrick.getBoundsInParent().getWidth() + 4)) + INFO_WIDTH,
-//                            yOff * layoutBrick.getBoundsInParent().getHeight() + INFO_HEIGHT,
-//                            1, 10, drop);
+
                     bricks.add(brick);
                 }
             }
