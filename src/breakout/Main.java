@@ -24,8 +24,11 @@ import java.util.ArrayList;
 /**
  * An introductory JavaFX program to run a game of breakout.
  *
+ * Main handles all game logic, GUI updating, and the main game loop. It depends on Ball, Brick, and PowerUp.
+ * Start the game by creating an instance of Main and calling launch(args);
+ *
  * @author Thomas Owens
- * Starter code taken from the first lab code, written by Robert C. Duvall
+ * Starter code taken from the first lab code, written by Robert C. Duvall.
  */
 public class Main extends Application {
     public static final String TITLE = "Alien Breakout";

@@ -5,6 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Interprets a text file to return an array of Bricks for a level initialized in Main.
+ *
+ * Catches a FileNotFound error with an invalid filepath when interpreting.
+ */
 public class LevelInterpreter {
     public static final int INFO_HEIGHT = 40;
     public static final int INFO_WIDTH = 20;
@@ -13,6 +18,11 @@ public class LevelInterpreter {
     public static final int BRICK_WIDTH = 36;
     public static final int BRICK_HEIGHT = 24;
 
+    /**
+     * Interprets a text file representing a Breakout level into a List of Bricks
+     * @param filepath the level's layout file
+     * @return an ArrayList of Bricks making up the level
+     */
     public static ArrayList<Brick> interpretLevelFromFile(String filepath) {
         try {
             File file = new File(filepath);
