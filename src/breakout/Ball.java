@@ -13,22 +13,21 @@ import javafx.scene.image.ImageView;
  * @author Thomas Owens
  */
 public class Ball extends Group {
-    private static final String BALL_IMAGE = "ball.gif";
-    private ImageView image;
-    private double[] direction;
     public static final int BALL_SPEED = 150;
     public static final double MAX_BALL_SPEED = 400;
+    private static final String BALL_IMAGE = "ball.gif";
+
+    private ImageView image;
+    private double[] direction;
 
     /**
      * Creates a new Ball (the 'number'-th ball) at coordinates (x, y).
      */
     public Ball(double x, double y, int number) {
-        super();
-        initializeImage();
-        this.image.setX(x - this.image.getLayoutBounds().getWidth() / 2.0);
-        this.image.setY(y - this.image.getLayoutBounds().getHeight() / 2.0);
+        initializeImage(x, y);
 
         this.direction = new double[]{0, 0};
+
         if (number == 0) {
             addVelocity(0 + 0.02 * Math.random(), 1);
         } else {
@@ -36,10 +35,13 @@ public class Ball extends Group {
         }
     }
 
-    private void initializeImage() {
+    private void initializeImage(double x, double y) {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(BALL_IMAGE));
         this.image = new ImageView(image);
         this.getChildren().add(this.image);
+
+        this.image.setX(x - this.image.getLayoutBounds().getWidth() / 2.0);
+        this.image.setY(y - this.image.getLayoutBounds().getHeight() / 2.0);
     }
 
     /**
@@ -52,7 +54,6 @@ public class Ball extends Group {
     public void move(double elapsedTime, int WIDTH, int INFO_WIDTH, int INFO_HEIGHT) {
         image.setX(image.getX() + BALL_SPEED * elapsedTime * direction[0]);
         image.setY(image.getY() + BALL_SPEED * elapsedTime * direction[1]);
-
 
         if (image.getX() <= INFO_WIDTH || image.getX() >= WIDTH - INFO_WIDTH - image.getBoundsInParent().getWidth()) {
             direction[0] *= -1;
@@ -71,6 +72,22 @@ public class Ball extends Group {
         direction[0] += xv;
         direction[1] += yv;
 
+        normalizeVelocity();
+    }
+
+    /**
+     * Multiplies this ball's velocity by given values
+     * @param xv the component to multiply in the x direction
+     * @param yv the component to multiply in the y direction
+     */
+    public void multiplyVelocity(double xv, double yv) {
+        direction[0] *= xv;
+        direction[1] *= yv;
+
+        normalizeVelocity();
+    }
+
+    private void normalizeVelocity() {
         double newSpeed = Math.sqrt(direction[0] * direction[0] + direction[1] * direction[1]);
         if (newSpeed > MAX_BALL_SPEED) {
             direction[0] *= MAX_BALL_SPEED / newSpeed;
@@ -131,20 +148,5 @@ public class Ball extends Group {
      */
     public double getMaxY() {
         return this.getBoundsInParent().getMaxY();
-    }
-
-    /**
-     * Multiplies this ball's velocity by given values
-     * @param xv the component to multiply in the x direction
-     * @param yv the component to multiply in the y direction
-     */
-    public void multiplyVelocity(double xv, double yv) {
-        direction[0] *= xv;
-        direction[1] *= yv;
-
-        double newSpeed = Math.sqrt(direction[0] * direction[0] + direction[1] * direction[1]);
-        if (newSpeed > MAX_BALL_SPEED) {
-            direction[0] *= MAX_BALL_SPEED / newSpeed;
-        }
     }
 }

@@ -34,9 +34,9 @@ public class Brick extends Group {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath));
         this.image = new ImageView(image);
         this.getChildren().add(this.image);
-
         this.image.setX(x);
         this.image.setY(y);
+
         this.durability = durability;
         this.score = score;
         this.drop = drop;
